@@ -6,10 +6,11 @@ def view(request):
     # print (request.GET)
     if 'user_id' in  request.GET:
         if request.GET.dict()['user_id'].isdigit():
-            print('Create pdf in here')
             user = User.objects.get(id=request.GET.dict()['user_id'])
             for i in user.answers.all():
                 print ('question:', i.question_name,' answer:', i.value)
+
+            print('Create pdf in here')
             responce = 'Your looking for user with id: ' + request.GET.dict()['user_id']
             return HttpResponse(responce)
         else:
