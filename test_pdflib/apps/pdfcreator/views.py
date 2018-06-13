@@ -1,6 +1,7 @@
 from django.shortcuts import HttpResponse
 from django.contrib.auth.models import User
 
+
 def view(request):
     # print('in view')
     # print (request.GET)
