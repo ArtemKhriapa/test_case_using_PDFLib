@@ -3,16 +3,13 @@ from datetime import datetime
 from python33.pdflib_py import *
 
 def PDF_Generate(cause_number, court_number,county, your_name, spuse_name, childs):
-    dt= str(datetime.now())
     p = PDF_new()
     font = PDF_load_font(p, "Helvetica", "host", "")
     font_bold = PDF_load_font(p, "Helvetica-Bold", "host", "")
 
-    if PDF_open_file(p,"pdf/"+your_name+"_"+dt+".pdf") == -1:
-        print("Couldn't open PDF file 'pdf/"+your_name+"_"+dt+".pdf'\n")
-    # else:
     PDF_set_info(p, "Author", "Khriapa Artem")
     PDF_set_info(p, "Title", "Test case")
+    PDF_begin_document(p, '', '')
     PDF_begin_page(p, 595, 841)
 
     PDF_setfont(p, font, 12.0)
@@ -51,20 +48,10 @@ def PDF_Generate(cause_number, court_number,county, your_name, spuse_name, child
     PDF_continue_text(p, ('%s,   County, Texas' % county))
 
     PDF_end_page(p)
-    PDF_close(p)
+    PDF_end_document(p,'');
+    bufered_doc = PDF_get_buffer(p)
     PDF_delete(p)
 
     print('PDF created!')
 
-    return your_name+"_"+dt+".pdf"
-
-cause_number = '111'
-court_number='999'
-county='far-far-away'
-your_name="ArnoldSwarzenegger"
-spuse_name='Van Damm'
-childs=['Bruce Li', 'Silvester Stallone']
-
-
-
-# PDF_Generate(cause_number, court_number,county, your_name, spuse_name, childs)
+    return bufered_doc

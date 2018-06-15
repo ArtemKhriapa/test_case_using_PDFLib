@@ -23,9 +23,8 @@ def view(request):
             court_number    = answers.get(question_name='court_number').value
             cause_number    = answers.get(question_name='cause_number').value
             childs          = [child.value for child in answers.filter(question_name='child')]
-            filepath = "pdf/"+PDF_Generate(cause_number, court_number,county, your_name, spuse_name, childs)
-            fsock = open(filepath,"rb")
-            response = HttpResponse(fsock, content_type='application/pdf')
+            generated_file = PDF_Generate(cause_number, court_number,county, your_name, spuse_name, childs)
+            response = HttpResponse(generated_file, content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename=%s.pdf' % your_name
             return response
         else:
