@@ -1,37 +1,16 @@
-# from sys import *
+import os
+from datetime import datetime
 from python33.pdflib_py import *
-# from PDFlib.PDFlib import PDFlib as P
-# p =  PDF_open_pdi_document('example.pdf' )
-#
-# text = 'adsadafaf'
-#
-#
-# try:
-#     p.open_file(p, filename='example.pdf')
-#
-#     print('here')
-# except Exception as e:
-#     print(e)
 
-# 1 pt = 1/72 inch = 25.4/72 mm = 0.3528 mm
-# from PDFlib.pdflib_py import *
-
-# cause_number = '123456'
-# court_number = '654321'
-# county = 'Some county'
-# your_name= 'Bill Clinton'
-# spuse_name='Monica Levinski'
-# childs = ['Barack Obama', 'Donald Trump', 'Jorge Bush jr']
-
-def Exsample_PDF_Generate(cause_number, court_number,county, your_name, spuse_name, childs):
+def PDF_Generate(cause_number, court_number,county, your_name, spuse_name, childs):
+    dt= str(datetime.now())
     p = PDF_new()
     font = PDF_load_font(p, "Helvetica", "host", "")
     font_bold = PDF_load_font(p, "Helvetica-Bold", "host", "")
 
-
-    if PDF_open_file(p, "pdf/hello_py222.pdf") == -1:
-        print("Couldn't open PDF file 'hello_py.pdf'\n")
-
+    if PDF_open_file(p,"pdf/"+your_name+"_"+dt+".pdf") == -1:
+        print("Couldn't open PDF file 'pdf/"+your_name+"_"+dt+".pdf'\n")
+    # else:
     PDF_set_info(p, "Author", "Khriapa Artem")
     PDF_set_info(p, "Title", "Test case")
     PDF_begin_page(p, 595, 841)
@@ -40,6 +19,7 @@ def Exsample_PDF_Generate(cause_number, court_number,county, your_name, spuse_na
 
     PDF_set_text_pos(p, 50, 770)
     PDF_continue_text(p, 'NOTICE: THIS DOCUMENT CONTAINS SENSITIVE DATA.')
+    PDF_continue_text(p, '')
     PDF_continue_text(p, ('                                       Cause number:  %s' % cause_number))
     PDF_continue_text(p, '')
     PDF_setfont(p, font_bold, 12.0)
@@ -76,13 +56,15 @@ def Exsample_PDF_Generate(cause_number, court_number,county, your_name, spuse_na
 
     print('PDF created!')
 
+    return your_name+"_"+dt+".pdf"
 
-# Exsample_PDF_Generate()
+cause_number = '111'
+court_number='999'
+county='far-far-away'
+your_name="ArnoldSwarzenegger"
+spuse_name='Van Damm'
+childs=['Bruce Li', 'Silvester Stallone']
 
 
-    # cause_number = '111',
-    # court_number='999',
-    # county='far-far-away',
-    # your_name='Arnold Swarzenegger',
-    # spuse_name='Van Damm',
-    # childs=['Bruce Li', 'Silvester Stallone']
+
+# PDF_Generate(cause_number, court_number,county, your_name, spuse_name, childs)

@@ -8,4 +8,6 @@ class Answer(models.Model):
     value = models.TextField()
     index = models.PositiveIntegerField(default=0)
 
+    def __str__(self):
+        return "User: %s, %s" % (self.user.username, self.value)
 
