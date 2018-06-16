@@ -37,8 +37,14 @@ def PDF_Generate(cause_number, court_number,county, your_name, spuse_name, child
     PDF_continue_text(p, '')
     PDF_setfont(p, font, 11.0)
 
+    childs_string = ''
     for i in childs:
-        PDF_continue_text(p, ('%s. %s' % (str(childs.index(i)+1), i)))
+        ch = str(childs.index(i)+1)+'.'+i+"   "
+        childs_string = childs_string + ch
+    print(childs_string)
+
+    tf = PDF_create_textflow(p, childs_string ,"fontname=Helvetica fontsize=14 encoding=unicode leading=120% alignment=justify")
+    PDF_fit_textflow(p, tf, 50, 580, 545, 500, '')
 
     PDF_set_text_pos(p, 350, 700)
     PDF_setfont(p, font, 11.0)
