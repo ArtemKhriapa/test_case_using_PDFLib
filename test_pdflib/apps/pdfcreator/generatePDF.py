@@ -33,8 +33,8 @@ def PDF_Generate(cause_number, court_number,county, your_name, spuse_name, child
     PDF_continue_text(p, '')
     PDF_continue_text(p, '')
     PDF_continue_text(p, '')
-    PDF_continue_text(p, 'AND IN THE INTEREST OF :')
-    PDF_continue_text(p, '')
+    PDF_continue_text(p, 'AND IN THE INTEREST OF : ')
+    PDF_continue_text(p, u"\u25a2")
     PDF_setfont(p, font, 11.0)
 
     childs_string = ''
@@ -43,7 +43,7 @@ def PDF_Generate(cause_number, court_number,county, your_name, spuse_name, child
         childs_string = childs_string + ch
     print(childs_string)
 
-    tf = PDF_create_textflow(p, childs_string ,"fontname=Helvetica fontsize=14 encoding=unicode leading=120% alignment=justify")
+    tf = PDF_create_textflow(p, childs_string ,"fontname=Helvetica fontsize=11 encoding=unicode leading=120% alignment=justify")
     PDF_fit_textflow(p, tf, 50, 580, 545, 500, '')
 
     PDF_set_text_pos(p, 350, 700)
