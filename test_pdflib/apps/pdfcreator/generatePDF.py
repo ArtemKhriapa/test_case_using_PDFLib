@@ -1,5 +1,3 @@
-import os
-from datetime import datetime
 from python33.pdflib_py import *
 
 def PDF_Generate(cause_number, court_number,county, your_name, spuse_name, childs):
@@ -41,7 +39,7 @@ def PDF_Generate(cause_number, court_number,county, your_name, spuse_name, child
     for i in childs:
         ch = str(childs.index(i)+1)+'.'+i+"   "
         childs_string = childs_string + ch
-    print(childs_string)
+    # print(childs_string)
 
     tf = PDF_create_textflow(p, childs_string ,"fontname=Helvetica fontsize=11 encoding=unicode leading=120% alignment=justify")
     PDF_fit_textflow(p, tf, 50, 580, 545, 500, '')

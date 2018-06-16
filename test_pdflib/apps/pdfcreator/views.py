@@ -1,21 +1,22 @@
 from django.shortcuts import HttpResponse
-from django.contrib.auth.models import User
 from apps.pdfcreator.models import Answer
 from apps.pdfcreator.generatePDF import PDF_Generate
 
 def view(request):
     if 'user_id' in  request.GET:
         if request.GET.dict()['user_id'].isdigit():
-            # your_name = Answer.objects.get(user=request.GET.dict()['user_id'], question_name ='your_name').value
-            # spuse_name = Answer.objects.get(user=request.GET.dict()['user_id'], question_name ='spuse_name').value
-            # county= Answer.objects.get(user=request.GET.dict()['user_id'], question_name ='county').value
-            # court_number= Answer.objects.get(user=request.GET.dict()['user_id'], question_name='court_number').value
-            # cause_number= Answer.objects.get(user=request.GET.dict()['user_id'], question_name='cause_number').value
-            # childs = []
-            # childs_list = Answer.objects.filter(user=request.GET.dict()['user_id'], question_name='child')
+            """first"""
+            # if so many Answer for questions in DB - і think it's better
+            # your_name     = Answer.objects.get(user=request.GET.dict()['user_id'], question_name ='your_name').value
+            # spuse_name    = Answer.objects.get(user=request.GET.dict()['user_id'], question_name ='spuse_name').value
+            # county        = Answer.objects.get(user=request.GET.dict()['user_id'], question_name ='county').value
+            # court_number  = Answer.objects.get(user=request.GET.dict()['user_id'], question_name='court_number').value
+            # cause_number  = Answer.objects.get(user=request.GET.dict()['user_id'], question_name='cause_number').value
+            # childs        = []
+            # childs_list   = Answer.objects.filter(user=request.GET.dict()['user_id'], question_name='child')
             # for child in childs_list:
             #     childs.append(child.value)
-            """enother variant"""
+            """second"""
             answers         = Answer.objects.filter(user=request.GET.dict()['user_id'])
             your_name       = answers.get(question_name='your_name').value
             spuse_name      = answers.get(question_name='spuse_name').value
@@ -23,7 +24,9 @@ def view(request):
             court_number    = answers.get(question_name='court_number').value
             cause_number    = answers.get(question_name='cause_number').value
             childs          = [child.value for child in answers.filter(question_name='child')]
+
             generated_file = PDF_Generate(cause_number, court_number,county, your_name, spuse_name, childs)
+
             response = HttpResponse(generated_file, content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename=%s.pdf' % your_name
             return response
